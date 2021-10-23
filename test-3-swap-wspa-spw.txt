@@ -1,0 +1,18 @@
+S
+15
+// testing if the swap function is working
+swap
+swamp
+wamp
+samp
+sanp
+sand
+sandy
+andy
+and
+pand
+panda
+wasp
+wsap
+wspa
+paws

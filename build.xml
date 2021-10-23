@@ -1,0 +1,65 @@
+<project name="CS256AntFile" default="dist" basedir=".">
+    <description>Build file for CS 256 F20 Projects</description>
+    <!--  TODO update these values as needed  -->
+    <property name="project-name" value="project1"/>
+    <property name="main-class" value="Main"/>
+    <!--  END TODO  -->
+    <!--  set global properties for this build  -->
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <target name="init">
+        <!--  Create the time stamp  -->
+        <tstamp/>
+        <!--
+         Create the build directory structure used by compile
+        -->
+        <mkdir dir="${build}"/>
+    </target>
+    <target name="compile" depends="init" description="compile the source">
+        <!--  Compile the Java code from ${src} into ${build}  -->
+        <javac destdir="${build}">
+            <src path="${src}"/>
+            <src path="."/>
+            <classpath>
+                <fileset dir="lib" erroronmissingdir="false">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="/java-libs" erroronmissingdir="false">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+    <target name="dist" depends="compile" description="generate the distribution">
+        <!--
+         Put everything in ${build} into the ${ant.project.name}.jar file
+        -->
+        <jar jarfile="${project-name}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+                <attribute name="Class-Path" value="/java-libs/java-getopt-1.0.14.jar"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="clean" description="clean up">
+        <!--  Delete the ${build} and ${dist} directory trees  -->
+        <delete dir="${build}"/>
+        <delete file="${project-name}.jar"/>
+        <delete file="fullsubmit.tar.gz"/>
+    </target>
+    <target name="fullsubmit" depends="clean" description="Create a tar.gz file to upload to the autograder">
+        <tar destfile="fullsubmit.tar.gz" compression="gzip">
+            <tarfileset dir="${src}" prefix="src/">
+                <include name="*.java"/>
+            </tarfileset>
+            <tarfileset dir="${src}">
+                <include name="test*txt"/>
+            </tarfileset>
+            <tarfileset dir=".">
+                <include name="*.java"/>
+                <include name="test*.txt"/>
+                <include name="build.xml"/>
+            </tarfileset>
+        </tar>
+    </target>
+</project>

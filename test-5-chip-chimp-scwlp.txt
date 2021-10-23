@@ -1,0 +1,18 @@
+C
+15
+// Complex dictionary example with duplicates and solution
+ch[io]p
+sh[io]p
+stop&
+le?t
+let
+leet
+shot
+chimp
+chimps
+chrimp
+shrimp
+shrim
+shim
+shri
+shi

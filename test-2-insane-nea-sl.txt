@@ -1,0 +1,11 @@
+S
+7
+// this checks to see if the program's length function works
+// both for words that are smaller and larger
+insane
+inne
+inane
+ine
+e
+nea
+ne
